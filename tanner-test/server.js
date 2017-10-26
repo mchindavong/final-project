@@ -36,8 +36,8 @@ app.use(express.static("public"));
 // Routes
 // =============================================================
 require("./routes/html-routes.js")(app);
-require("./routes/agent-api-routes.js")(app);
-require("./routes/question-api-routes.js")(app);
+require("./routes/user-api-routes.js")(app);
+require("./routes/gameplay-api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
@@ -47,4 +47,3 @@ db.sequelize.sync().then(function() {
     });
 })
 
-//https://pacific-fortress-90966.herokuapp.com/
