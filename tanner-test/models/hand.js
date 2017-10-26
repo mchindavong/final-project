@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Question = sequelize.define("Question", {
+    var Hand = sequelize.define("Question", {
         uuid: {
             type: DataTypes.STRING
 
@@ -25,13 +25,13 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    Question.associate = function(models) {
-        Question.belongsTo(models.Agent, {
+    Hand.associate = function(models) {
+        Hand.belongsTo(models.Game, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
 
-    return Question;
+    return Hand;
 };

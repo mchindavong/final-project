@@ -4,33 +4,28 @@ var path = require("path");
 
 module.exports = function(app) {
 
-    app.get("/api/agent/username", function(req, res) {
-        db.Agent.findOne({
+    app.get("/api/userLogin/username", function(req, res) {
+        db.User.findOne({
             where:{
                 username: req.username,
-                password: req.password
             }
-        }).then(function(dbAgent) {
-            res.cookie('AgentId',dbAgent.id);
-            res.cookie("username" , dbAgent.username);
+        }).then(function(err,resp) {
+          if(err){
+            return err;
+          }
+          else{
+            db.UserSecret.findOne({
+              where:{
+                userID:resp.userID
+              }
+            }).then(function(err,resp){
+                res.cookie('UserID',resp.userID)
+            })
+            res.cookie('UserID',resp.id);
             res.json(dbAgent);
+          }
         });
     });
-
-    app.put("/api/agent/berlin", function(req, res) {
-        db.Agent.update({
-            berlin:true
-        }
-        ,
-          {
-            where: {
-              username: req.cookies.username
-            }
-          }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-        });
 
       app.put("/api/agent/istanbul", function(req, res) {
         db.Agent.update({
