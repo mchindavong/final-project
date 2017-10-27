@@ -1,10 +1,19 @@
 var db = require("../models");
 var express = require('express');
 var path = require("path");
+const uuidv4 = require("uuid/v4");
 
 module.exports = function(app) {
 
-    app.get("/api/userLogin/username", function(req, res) {
+    app.post("/api/userSignup", function(req, res) {
+      db.user.create(req.body).then(function(dbAgent) {
+        res.cookie("username", dbAgent.username);
+        res.cookie('AgentId',dbAgent.id);
+        res.json(dbAgent);
+      });
+    });
+
+    app.get("/api/userLogin", function(req, res) {
         db.User.findOne({
             where:{
                 username: req.username,
@@ -101,13 +110,7 @@ module.exports = function(app) {
           });
       });
 
-    app.post("/api/agent/", function(req, res) {
-        db.Agent.create(req.body).then(function(dbAgent) {
-            res.cookie("username", dbAgent.username);
-            res.cookie('AgentId',dbAgent.id);
-            res.json(dbAgent);
-        });
-    });
+    
 
     app.delete("/api/agent/:id", function(req, res) {
         db.Agent.destroy({
