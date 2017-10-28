@@ -13,7 +13,6 @@ module.exports = function(app) {
     });
     app.post("/api/secretSignup", function(req, res) {
       db.UserSecret.create(req.body).then(function(dbUserSecret) {
-        res.cookie("username", dbUser.username);
         res.json(dbUserSecret);
       });
     });
@@ -33,30 +32,31 @@ module.exports = function(app) {
                 userID: resp.userID
               }
             }).then(function(err,resp){
+              if(err){
+                return err;
+              }
+              else{
                 res.cookie('UserID',resp.userID)
+              }
             })
-            res.cookie('UserID',resp.id);
-            res.json(dbAgent);
+            res.json(dbUser);
           }
         });
     });
 
-      app.get("/api/cardplay/hostdown", function(req, res) {
-        db.Game.findOne({
-          where:{
-            gameID:req.gameID
+    app.put("/api/cardplay/down", function(req, res) {
+      var card = req.cardname;
+      db.Hand.update({
+          card : false
+      },
+        {
+          where: {
+            handID: req.cookies.hand
           }
-        }).then(function(req,res){
-          db.Hand.findOne({
-            where:{
-              handID: req.hostHandID
-            }
-          })
-        }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-      });
+        }).then(function(dbHand) {
+          res.json(dbHand);
+        });
+    });
 
       app.put("/api/cardplay/pick", function(req, res) {
         db.Hand.update({
@@ -64,74 +64,24 @@ module.exports = function(app) {
         },
           {
             where: {
-              username: req.cookies.username
+              handID: req.cookies.hand
             }
           }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
+            res.json(dbHand);
           });
       });
 
-      app.put("/api/agent/moscow", function(req, res) {
-        db.Agent.update({
-            moscow:true
-        }
-        ,
-          {
-            where: {
-              username: req.cookies.username
-            }
-          }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-      });
-
-      app.put("/api/agent/prague", function(req, res) {
-        db.Agent.update({
-            prague:true
-        },
-          {
-            where: {
-              username: req.cookies.username
-            }
-          }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-      });
-
-      app.put("/api/agent/rome", function(req, res) {
-        db.Agent.update({
-            rome:true
-        }
-        ,
-          {
-            where: {
-              username: req.cookies.username
-            }
-          }).then(function(dbAgent) {
-            res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-      });
-
-      app.put("/api/agent/warsaw", function(req, res) {
-        db.Agent.update({
-            warsaw:true
-        }
-        ,
-          {
-            where: {
-              username: req.cookies.username
-            }
-          }).then(function(dbAgent) {
-            //res.cookie("username" , dbAgent.username);
-            res.json(dbAgent);
-          });
-      });
-
-    
+      //app.put("/api/agent/warsaw", function(req, res) {
+        //db.Agent.update({
+          //  warsaw:true
+       // },{
+            //where: {
+              //username: req.cookies.username
+            //}
+          //}).then(function(dbAgent) {
+            //res.json(dbAgent);
+          //});
+      //});
 
     app.delete("/api/agent/:id", function(req, res) {
         db.Agent.destroy({
