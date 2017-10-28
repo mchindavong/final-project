@@ -3,41 +3,41 @@ $(document).ready(function() {
     $(document).on("click", "#sign-up", handleUserSignUp);
     $(document).on("click", "#sign-in", handleUserSignIn);
   
-    
-  
-    // A function to handle what happens when the form is submitted to create a new Agent
+    const numberGenerate = () => {
+        $.ajax({
+            method: "GET",
+            url: "http://setgetgo.com/guid/get.php",
+          })
+          .done(function(response) {
+              if (response){
+                 var guid = response.toString();
+                 guid.replace(/{/g, '');
+                 guid.replace(/}/g, '');
+                 return guid;
+              }
+              else{
+                  alert('err');
+              }
+          });
+    }
+
+   
     function handleUserSignUp(event) {
+
       event.preventDefault();
-      var uuid;
-      $.ajax({
-        method: "GET",
-        url: "http://setgetgo.com/guid/get.php",
-      })
-      .done(function(response) {
-          if (response){
-             var guid = response.toString();
-             guid.replace(/{/g, '');
-             guid.replace(/}/g, '');
-             uuid=guid;
-          }
-          else{
-              alert('err');
-          }
-      });
       var nameInput = $("#username").val().trim();
       var passInput = $("#password").val().trim();
-      // Don't do anything if the name fields hasn't been filled out
-      if (!nameInput||!passInput){//.val().trim().trim()) {
-        return;
-      }
+      if (!nameInput||!passInput){
+        return;}
       console.log(nameInput.val().trim());
-      // Calling the uploadAgent function and passing in the value of the name input
+
+      // Calling the uploadUser function and passing in the value of the name input
       newUser({
         username: nameInput,
-        userId: uuid
+        userID: numberGenerate()
       });
       newUserSecret({
-        userId: uuid,
+        userID: numberGenerate(),
         password: passInput
       })
     }

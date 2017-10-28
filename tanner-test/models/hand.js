@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Hand = sequelize.define("Hand", {
-        handId:{
+        handID:{
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
@@ -213,14 +213,6 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         },
     });
-
-    Hand.associate = function(models) {
-        Hand.belongsTo(models.Game, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
 
     return Hand;
 };

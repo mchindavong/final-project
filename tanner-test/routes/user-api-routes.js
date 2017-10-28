@@ -6,10 +6,15 @@ const uuidv4 = require("uuid/v4");
 module.exports = function(app) {
 
     app.post("/api/userSignup", function(req, res) {
-      db.user.create(req.body).then(function(dbAgent) {
-        res.cookie("username", dbAgent.username);
-        res.cookie('AgentId',dbAgent.id);
-        res.json(dbAgent);
+      db.User.create(req.body).then(function(dbUser) {
+        res.cookie("UserID", dbUser.userID);
+        res.json(dbUser);
+      });
+    });
+    app.post("/api/secretSignup", function(req, res) {
+      db.UserSecret.create(req.body).then(function(dbUserSecret) {
+        res.cookie("username", dbUser.username);
+        res.json(dbUserSecret);
       });
     });
 
@@ -25,7 +30,7 @@ module.exports = function(app) {
           else{
             db.UserSecret.findOne({
               where:{
-                userID:resp.userID
+                userID: resp.userID
               }
             }).then(function(err,resp){
                 res.cookie('UserID',resp.userID)
@@ -36,9 +41,26 @@ module.exports = function(app) {
         });
     });
 
-      app.put("/api/agent/istanbul", function(req, res) {
-        db.Agent.update({
-            istanbul:true
+      app.get("/api/cardplay/hostdown", function(req, res) {
+        db.Game.findOne({
+          where:{
+            gameID:req.gameID
+          }
+        }).then(function(req,res){
+          db.Hand.findOne({
+            where:{
+              handID: req.hostHandID
+            }
+          })
+        }).then(function(dbAgent) {
+            res.cookie("username" , dbAgent.username);
+            res.json(dbAgent);
+          });
+      });
+
+      app.put("/api/cardplay/pick", function(req, res) {
+        db.Hand.update({
+            card : true
         },
           {
             where: {
@@ -68,8 +90,7 @@ module.exports = function(app) {
       app.put("/api/agent/prague", function(req, res) {
         db.Agent.update({
             prague:true
-        }
-        ,
+        },
           {
             where: {
               username: req.cookies.username

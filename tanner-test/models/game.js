@@ -1,22 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Game = sequelize.define("Game", {
-        host:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        guest:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        hostHand:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        guestHand:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        tableHand:{
+        gameID:{
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -24,7 +8,23 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        gameId:{
+        hostID:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        guestID:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        hostHandID:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        guestHandID:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        tableHandID:{
             type: DataTypes.STRING,
             allowNull: false
         }
