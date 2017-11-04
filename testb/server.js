@@ -47,7 +47,7 @@ db.sequelize.sync().then(function() {
     });
 })
 
-//sequelize model:create --name "user" --attributes "username:string"
+//sequelize model:create --name "user" --attributes "userID:string"
 //sequelize model:create --name "usersecret" --attributes "userID:string"
 //sequelize model:create --name "game" --attributes "gameID:string"
 //sequelize model:create --name "hand" --attributes "handID:string"
