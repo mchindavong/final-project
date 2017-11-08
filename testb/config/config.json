@@ -1,0 +1,29 @@
+{
+  "development": {
+    "port":8889,
+    "username": "root",
+    "password": "root",
+    "database": "database_game",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "facebookAuth": {
+    "clientID": "218865855319832",
+    "clientSecret": "3ea08ba1149aa832a91193f2f6a51b54",
+    "callbackURL": "https://enigmatic-reaches-68653.herokuapp.com/"
+  }
+}
