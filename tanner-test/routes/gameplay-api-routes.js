@@ -1,85 +1,81 @@
-// *********************************************************************************
-// api-routes.js - this file offers a set of routes for displaying and saving data to the db
-// *********************************************************************************
-
-// Dependencies
-// =============================================================
-
 // Requiring our models
 var db = require("../models");
-const uuidv4 = require("uuid/v4");
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
-    // GET route for getting all of the questions
-    app.get("/api/questions", function(req, res) {
-        var query = {};
-        db.Question.findAll({
-            where: query,
-            include: [db.Agent]
-        }).then(function(dbQuestion) {
-            res.json(dbQuestion);
+    // GET route for finding all games by a particular user
+    app.get("/api/gamesHosted", function(req, res) {
+        db.game.findAll({
+            where: {
+                hostID: req.userID
+            }
+        }).then(function(hostedGames) {
+            res.json(hostedGames);
         });
     });
-    //still need to build out functionality to keep a users score
-    //and also to track if they have visited all their questions 
-    app.get("/api/checkAnswer", function(req, res) {
-        console.log(req.body);
-        var query = req.body.questionId;
-        db.Question.findOne({
-            where: query,
-            include: [db.Agent]
-        }).then(function(dbQuestion) {
-            res.json(dbQuestion);
+    app.get("/api/gamesGuested", function(req, res) {
+        db.game.findAll({
+            where: {
+                guestID: req.userID
+            }
+        }).then(function(guestedGames) {
+            res.json(guestedGames);
+        });
+    });
+    app.get("/api/playThisGame", function(req, res) {
+        db.game.findOne({
+            where: {
+                gameID: req.gameID
+            }
+        }).then(function(thisGame) {
+            res.cookie('GameID',res.gameID)
+            res.sendFile(path.join(__dirname, "../public/game.html"));
         });
     });
 
-    // app.post("/api/checkAnswer", function(req, res, next) {
-    //     console.log(req.body);
-    //     var query = req.body.questionId;
-    //     next(query);
-    // }, function(req, res) {
-    //     app.get("/api/questions", function(req, res) {
-    //         db.Question.findOne({
-    //             where: query,
-    //             include: [db.Agent]
-    //         }).then(function(dbQuestion) {
-    //             res.json(dbQuestion);
-    //         });
-
-    //     })
-
-    // });
-
-
-    //question generator post
-    app.post("/api/questions", function(req, res) {
-        var uuid;
-        var city = ["London", "Berlin", "Moscow", "Prague", "Moscow", "Rome", "Istanbul", "Warsaw"];
-        var rand;
-        var qrURL;
-        var id = req.cookies.AgentId;
-        for (var i = 0; i < req.body.question.length; i++) {
-            rand = Math.floor((Math.random() * 8));
-            uuid = uuidv4();
-            //url for deployed app testing
-            //data=https://cryptic-ridge-88864.herokuapp.com/api/questions/"
-
-            db.Question.create({
-                AgentId: id,
-                uuid: uuid,
-                city: city[rand],
-                question: req.body.question[i],
-                correct_answer: req.body.correct_answer[i]
-            })
-        }
+    // PUT route for updating hands 
+    app.put("/api/up/blanco", function(req, res) {
+        let blanco = req.cardSpec;
+        db.hand.update({
+            blanco:true
+        },{
+            where: {
+              handID: req.cookies.handID
+            }
+          }).then(function(hand) {
+            res.json(hand);
+          });
+    });
+    app.put("/api/down/blanco", function(req, res) {
+        let blanco = req.cardSpec
+        db.hand.update({
+            blanco:false
+        },{
+            where: {
+              handID: req.cookies.handID
+            }
+          }).then(function(hand) {
+            res.json(hand);
+          });
+    });
+    app.get("/api/hand", function(req, res) {
+        db.hand.findOne({
+            where: {
+              handID: req.cookies.handID
+            }
+          }).then(function(hand) {
+            res.json(hand);
+          });
     });
 
 
-
-    // DELETE route for deleting mission
+    // CREATE route for new game
+    app.create("/api/game/",function(req,res){
+        
+    });
+    // DELETE route for deleting game
     app.delete("/api/questions/:id", function(req, res) {
         db.Question.destroy({
             where: {

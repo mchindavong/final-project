@@ -6,19 +6,19 @@ const uuidv4 = require("uuid/v4");
 module.exports = function(app) {
 
     app.post("/api/userSignup", function(req, res) {
-      db.User.create(req.body).then(function(dbUser) {
+      db.user.create(req.body).then(function(dbUser) {
         res.cookie("UserID", dbUser.userID);
         res.json(dbUser);
       });
     });
     app.post("/api/secretSignup", function(req, res) {
-      db.UserSecret.create(req.body).then(function(dbUserSecret) {
+      db.usersecret.create(req.body).then(function(dbUserSecret) {
         res.json(dbUserSecret);
       });
     });
 
     app.get("/api/userLogin", function(req, res) {
-        db.User.findOne({
+        db.user.findOne({
             where:{
                 username: req.username,
             }
@@ -27,7 +27,7 @@ module.exports = function(app) {
             return err;
           }
           else{
-            db.UserSecret.findOne({
+            db.userSecret.findOne({
               where:{
                 userID: resp.userID
               }
@@ -44,32 +44,6 @@ module.exports = function(app) {
         });
     });
 
-    app.put("/api/cardplay/down", function(req, res) {
-      var card = req.cardname;
-      db.Hand.update({
-          card : false
-      },
-        {
-          where: {
-            handID: req.cookies.hand
-          }
-        }).then(function(dbHand) {
-          res.json(dbHand);
-        });
-    });
-
-      app.put("/api/cardplay/pick", function(req, res) {
-        db.Hand.update({
-            card : true
-        },
-          {
-            where: {
-              handID: req.cookies.hand
-            }
-          }).then(function(dbAgent) {
-            res.json(dbHand);
-          });
-      });
 
       //app.put("/api/agent/warsaw", function(req, res) {
         //db.Agent.update({
@@ -83,13 +57,13 @@ module.exports = function(app) {
           //});
       //});
 
-    app.delete("/api/agent/:id", function(req, res) {
-        db.Agent.destroy({
+    app.delete("/api/user", function(req, res) {
+        db.user.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function(dbAgent) {
-            res.json(dbAgent);
+        }).then(function(dbUser) {
+            res.json(dbUser);
         });
     });
 
