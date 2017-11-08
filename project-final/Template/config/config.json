@@ -1,0 +1,26 @@
+{
+    "development": {
+        "port": 8889,
+        "username": "root",
+        "password": "root",
+        "database": "wargame_db",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": null,
+        "database": "wargame_db",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "production": {
+        "port": 3306,
+        "username": "bpgw3w1dh1eo296f",
+        "password": "uld1xw5pdzyef7wr",
+        "database": "t4knoxvxty615v9u",
+        "host": "etdq12exrvdjisg6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+        "dialect": "mysql",
+        "use_env_variable": "JAWSDB_URL"
+    }
+}

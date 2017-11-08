@@ -1,0 +1,307 @@
+
+<!--<body  style="color: #262626">-->
+<!--<script src="..assets/js/cities.js"></script>-->
+<script>
+$(document).ready(function(){
+    $( window ).on( "load", function() {
+        var uuid=window.location.pathname;
+        var uuid= uuid.toString();
+
+        var citiesByUuid =["/9a5d03d6-6e04-49df-aaa3-0d1313b13676",
+                   "/c24f71c6-90fb-4d81-b271-432cbe161b17",
+                   "/921f0551-354a-4758-8823-33edac508687",
+                   "/2758a3a3-b741-4f7b-bc46-0b3b79d2b793",
+                   "/1feeacc3-b0e4-40dc-ad38-908aa14e1db4",
+                   "/163318ea-5835-46b8-8b19-7c69807b1263"];
+        var citiesByName = ["berlin","istanbul","moscow",
+                            "prague","rome","warsaw"];
+        var loc = citiesByUuid.indexOf(uuid);
+        console.log(citiesByName[loc]);
+        city = citiesByName[loc];
+
+        if (city==='berlin'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/berlin",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+
+        else if (city==='istanbul'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/istanbul",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+        else if (city==='moscow'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/moscow",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+        else if (city==='prague'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/prague",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+        else if (city==='rome'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/rome",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+        else if (city==='warsaw'){
+            $.ajax({
+                method: "PUT",
+                url: "/api/agent/warsaw",
+              })
+              .done(function(response) {
+                  if (response){
+                      console.log(response);
+                      alert("success! now keep searching");
+                  }
+                  else{
+                      alert('err');
+                  }
+                //window.location.href = "/questions";
+              });
+        }
+        else{
+            console.log("p");
+        }
+            //in user session, load a new window when they scan a qr code
+            function createQuestion() {
+    
+                var questionArray = {
+                    username: "",
+                    question: [],
+                    correct_answer: []
+                }
+                var trivia = "https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=boolean";
+                $.get(trivia, function(data) {
+                    console.log(data.results);
+                    data.results.forEach(function(element) {
+                        questionArray.question.push(element.question);
+                        questionArray.correct_answer.push(element.correct_answer);
+                    });
+                    var rand = Math.floor((Math.random() * 10));
+                    $(".question").html(questionArray.question[rand]);
+                    console.log(questionArray);
+
+                    $.post("/api/questions", questionArray);
+                });
+            }
+            createQuestion()
+                // function getURL(){
+                //     $.get("/api/questions/3965ff7a-ae3b-4576-815c-07a1600baad3")
+                // }
+                // qrURL as a parameter?
+                //this function is called on london.html page load and this function
+                //calls the api to get the question Object and display question in html
+    
+            $('#logo').addClass('animated fadeIn');
+            $("input:text:visible:first").focus();
+    
+            $('#username').focus(function() {
+                $('label[for="username"]').addClass('selected');
+            });
+            $('#username').blur(function() {
+                $('label[for="username"]').removeClass('selected');
+            });
+            $('#password').focus(function() {
+                $('label[for="password"]').addClass('selected');
+            });
+            $('#password').blur(function() {
+                $('label[for="password"]').removeClass('selected');
+            });
+    //script to trigger flight animation
+    function fly(){
+    document.getElementById('plane').className ='flight';
+  }
+  //script to hide element after animation
+  var plane = document.getElementById("plane");
+ plane.addEventListener('webkitAnimationEnd',function(){
+     plane.style.display = 'none'; }, false);
+
+    var cityName = "{{city}}";
+    var uuid = "{{uuid}}";
+    var userScore;
+    var userGuess;
+    //var totalVisit = {{visited}};
+
+    
+    //attempt to close user session      
+    //var myWindow = window.open("localhost:8080/questions/{{uuid}}");
+    function closeWin() {
+    myWindow.close();
+    }
+
+    //check user guess against db answer
+              function displayResult(userGuess){
+               
+                if($(".displayResult").css("display") === "none"){
+                    $(".displayResult").css("display","block");
+                } else {
+                    $(".displayResult").css("display","none");
+                }
+
+                if(userGuess === "{{correct_answer}}"){
+                    $(".displayResult h3").html("Correct! Go find another City!");
+                    userScore = 3;
+                    console.log($(".displayResult h3").val());
+                    if($(".displayResult h3").val() && $(".advice h3").val()){
+                        update();
+                    }
+
+                
+                } else {
+                    $(".displayResult h3").html("Sorry, wrong! Go find another City!");
+                    userScore = 0;
+                     if($(".displayResult h3").val() && $(".advice h3").val()){
+                        update();
+                    }
+                }
+            }
+
+            $(".userGuessT").on("click", function(event){
+
+                event.preventDefault();
+                        userGuess = "True";
+                        $(".userGuessT").hide();
+                        $(".userGuessF").hide();
+                        displayResult(userGuess);
+
+
+                });
+            $(".userGuessF").on("click", function(event){
+                        event.preventDefault();
+                        userGuess = "False";
+                        $(".userGuessF").hide();
+                        $(".userGuessT").hide();
+                        displayResult(userGuess);
+                 });
+
+//checks visit reply and counts how many people have visited this city
+  $(".visited").on("click", function(event){
+
+            event.preventDefault();
+            totalVisit += 1;
+            $(".visited").hide();
+            $(".mightVisit").hide();
+            $(".advice h3").html("You earn a visit badge!");
+            updateVisit();
+           });
+           
+$(".mightVisit").on("click", function(event){
+            event.preventDefault();
+            totalVisit += 0; 
+            $(".visited").hide();
+            $(".mightVisit").hide();
+            $(".advice h3").html("Consider making this your next destination!");
+            updateVisit();
+            });
+    
+});
+
+});
+</script>
+
+ <div class = "container">
+     <div class ="row">
+        <div class = "col-md-12 text-center">
+            <h1 id="location"><strong>Destination: {{city}}</strong></h1>
+        </div>
+    </div>  
+     
+    <div class ="row">
+        <div class = "col-md-6 text-center panel">
+
+            
+            <div id="question" class="city-{{city}}">
+            <h1>You have arrived in {{city}}!</h1>
+            <h3>Here is your question:</h3>
+            <hr style="background-color: #262626">
+
+            <h3 id="q-select" class="question">           
+                {{question}}        
+            </h3>   
+                    <div id="userAnswer">
+                        <div class = "userGuessT"><h3>True</h3></div>
+                        <div class = "userGuessF"><h3>False</h3></div>
+                    </div>
+
+                <div class = "displayResult"><h3></h3></div>
+               
+            </div>
+            <div class="fly">
+                  <h3>Take off to your next destination!</h3>
+            <img id = "plane"  src = "../assets/images/fly.jpg" style="width:328px; height: 153px" onclick="fly()"/>
+            </div>
+
+        <div><h3>Have you ever visited {{city}} before?</h3><br>
+        <div class="visited"><h3>Yes</h3></div>
+        <div class="mightVisit"><h3>No</h3></div>
+        </div>
+        <div class = "advice"><h3></h3></div>          
+        </div>
+        <div class = "col-md-6">
+            <div class = "img img-responsive center-block">
+            <a href="http://www.wikipedia.com/wiki/{{city}}" target="_blank">
+            <img src = "../assets/images/{{city}}.jpg" style="width: 650px; height: 600px"/>
+            </a>
+            </div>  
+        </div>
+ </div>
+
+ 
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>War Card Game</title>
+</head>
+<body>
+    
+        <div id="play-page" class="inner-page" style="height: 615px;">
+    
+
+        <div id="left-player" class="avatar" style="">
+            <div class="face-small face-1"></div>
+            <small>John</small>
+            <div id="left-player-bubble" class="bubble"><p><span></span></p></div>
+        </div>
+
+        <div id="right-player" class="avatar">
+            <div class="face-small face-3"></div>
+            <small>Lisa</small>
+            <div id="right-player-bubble" class="bubble"><p><span></span></p></div>
+        </div>
+        
+        <div id="top-player" class="avatar">
+            <div class="face-small face-2"></div>
+            <small>Bill</small>
+            <div id="top-player-bubble" class="bubble"><p><span></span></p></div>
+        </div>
+
+        <div id="bottom-player" class="avatar" style="display: block;">
+            <div class="face-small face-0"></div>
+            <small>You</small>
+            <div id="bottom-player-bubble" class="bubble"><p><span></span></p></div>
+        </div>
+        
+        <a href="/avatars/" id="open-player-picker">Change<span> player image...</span></a>
+       
+        
+        
+    
+
+    <div id="messageBox" style="top: 400px;"><p>Click Deal to go to war!</p></div>
+
+    <!-- Old browser DIV. Usually hidden. -->
+    <div id="oldbrowser">
+        <p>
+            You are using a very old browser, that is no longer supported by this site. We recommend that you upgrade to one of the following browsers:
+        </p>
+        <p>
+            <a href="https://www.mozilla.org/en-US/firefox/new/" class="lefticon" target="_blank">
+                <img id="firefox-Logo" border="0" alt="Download Mozilla Firefox" src="" width="100" height="100">
+                <span class="caption"> Download Mozilla Firefox</span>
+            </a>
+            <a href="https://www.google.com/chrome/" class="righticon" target="_blank">
+                <img id="Chrome-Logo" border="0" alt="Download Google Chrome" src="" width="100" height="100">
+                <span class="caption"> Download Google Chrome</span>
+            </a>       
+        </p>
+        <a id="hidebutton" onclick="$('#oldbrowser').hide();">(hide)</a>
+    </div>
+    <!-- End Old browser. Usually hidden. -->
+
+    
+    <div id="war-sign">WAR</div>
+    <div id="deal"><button class="big">Deal</button></div>
+
+
+    
+        <!-- Win and lose screens -->
+        <div id="results-div">
+            <div class="dialog results" id="result-box">
+                <h3>Congratulations, you won!</h3>
+                <div class="trophy"></div>
+                <span class="winner-img face-large face-1" id="left-player-win"></span>
+                <span class="winner-img face-large face-3" id="right-player-win"></span>
+                <span class="winner-img face-large face-2" id="top-player-win"></span>
+                <span class="winner-img face-large face-0" id="bottom-player-win"></span>
+                <div class="trophy"></div>
+                <div class="button-panel">
+                    <button id="start-new-game">Start a new game!</button>
+                </div>
+            </div>
+        </div>
+    
+<div class="card d14 bottom" style="left: 99px; top: 190px; z-index: 1;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c7 bottom" style="left: 99px; top: 190px; z-index: 2;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c4 bottom" style="left: 99px; top: 190px; z-index: 3;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h11 bottom" style="left: 99px; top: 190px; z-index: 4;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c14 bottom" style="left: 99px; top: 190px; z-index: 5;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h2 bottom" style="left: 99px; top: 190px; z-index: 6;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c13 bottom" style="left: 99px; top: 190px; z-index: 7;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h12 bottom" style="left: 98px; top: 189px; z-index: 8;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d11 bottom" style="left: 98px; top: 189px; z-index: 9;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s7 bottom" style="left: 98px; top: 189px; z-index: 10;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d3 bottom" style="left: 98px; top: 189px; z-index: 11;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c5 bottom" style="left: 98px; top: 189px; z-index: 12;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h13 bottom" style="left: 98px; top: 189px; z-index: 13;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s14 bottom" style="left: 98px; top: 189px; z-index: 14;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s12 bottom" style="left: 98px; top: 189px; z-index: 15;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s4 bottom" style="left: 97px; top: 188px; z-index: 16;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c2 bottom" style="left: 97px; top: 188px; z-index: 17;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d13 bottom" style="left: 97px; top: 188px; z-index: 18;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s13 bottom" style="left: 97px; top: 188px; z-index: 19;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h5 bottom" style="left: 97px; top: 188px; z-index: 20;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d8 bottom" style="left: 97px; top: 188px; z-index: 21;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d9 bottom" style="left: 97px; top: 188px; z-index: 22;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h8 bottom" style="left: 97px; top: 188px; z-index: 23;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h10 bottom" style="left: 96px; top: 187px; z-index: 24;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s6 bottom" style="left: 96px; top: 187px; z-index: 25;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h6 bottom" style="left: 96px; top: 187px; z-index: 26;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d5 bottom" style="left: 96px; top: 187px; z-index: 27;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s10 bottom" style="left: 96px; top: 187px; z-index: 28;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s5 bottom" style="left: 96px; top: 187px; z-index: 29;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d12 bottom" style="left: 96px; top: 187px; z-index: 30;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s8 bottom" style="left: 96px; top: 187px; z-index: 31;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c12 bottom" style="left: 95px; top: 186px; z-index: 32;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d6 bottom" style="left: 95px; top: 186px; z-index: 33;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s3 bottom" style="left: 95px; top: 186px; z-index: 34;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h14 bottom" style="left: 95px; top: 186px; z-index: 35;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h7 bottom" style="left: 95px; top: 186px; z-index: 36;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c11 bottom" style="left: 95px; top: 186px; z-index: 37;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s9 bottom" style="left: 95px; top: 186px; z-index: 38;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c10 bottom" style="left: 95px; top: 186px; z-index: 39;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c9 bottom" style="left: 94px; top: 185px; z-index: 40;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d10 bottom" style="left: 94px; top: 185px; z-index: 41;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c8 bottom" style="left: 94px; top: 185px; z-index: 42;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d2 bottom" style="left: 94px; top: 185px; z-index: 43;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d4 bottom" style="left: 94px; top: 185px; z-index: 44;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h9 bottom" style="left: 94px; top: 185px; z-index: 45;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c6 bottom" style="left: 94px; top: 185px; z-index: 46;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s2 bottom" style="left: 94px; top: 185px; z-index: 47;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h3 bottom" style="left: 93px; top: 184px; z-index: 48;"><div class="facedown"></div><div class="faceup"></div></div><div class="card s11 bottom" style="left: 93px; top: 184px; z-index: 49;"><div class="facedown"></div><div class="faceup"></div></div><div class="card h4 bottom" style="left: 93px; top: 184px; z-index: 50;"><div class="facedown"></div><div class="faceup"></div></div><div class="card d7 bottom" style="left: 93px; top: 184px; z-index: 51;"><div class="facedown"></div><div class="faceup"></div></div><div class="card c3 bottom" style="left: 93px; top: 184px; z-index: 52;"><div class="facedown"></div><div class="faceup"></div></div></div>
+
+</body>
+</html>

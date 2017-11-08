@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Card Game</title>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="loginStyle/animate.css"> -->
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="assets/js/index.js"></script>
+</head>
+
+<body>
+    <div class="container topcontainer">
+        <div class="top">
+            <h1 id="title" class="hidden"><span id="logo">WAR <span>Game</span></span>
+            </h1>
+        </div>
+        <div class="login-box animated fadeIn">
+            <div class="box-header">
+                <h2>Are you Ready!!!</h2>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg">Start Game</button>
+           <!-- <a href="#">
+                <p class="small">Forgot your password?</p>
+            </a>
+            <a href="#">
+                <p class="medium">
+                    <bold>First Time? Sign Up Here</bold>
+                </p>
+            </a> -->
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#logo').addClass('animated fadeIn');
+        $("input:text:visible:first").focus();
+    });
+    $('#username').focus(function() {
+        $('label[for="username"]').addClass('selected');
+    });
+    $('#username').blur(function() {
+        $('label[for="username"]').removeClass('selected');
+    });
+    $('#password').focus(function() {
+        $('label[for="password"]').addClass('selected');
+    });
+    $('#password').blur(function() {
+        $('label[for="password"]').removeClass('selected');
+    });
+</script>
+
+</html>
