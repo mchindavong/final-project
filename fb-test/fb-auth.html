@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Facebook Login JavaScript Example</title>
+<title>Facebook Login</title>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -17,10 +17,6 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-    } else {
-      // The person is not logged into your app or we are unable to tell.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
     }
   }
 
@@ -79,6 +75,8 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+
+  
 </script>
 
 <!--
@@ -88,6 +86,7 @@
 -->
 
 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
 
 <div id="status">
 </div>
